@@ -71,7 +71,11 @@ def fact_rows(lang: dict, keys: list[str]) -> str:
     labels = lang["fact_labels"]
     rows = []
     for key in keys:
-        value = fact_value(key)
+        if key == "hours" and FACTS.get("hours"):
+            # Times are single-sourced; the sentence around them is the language's own.
+            value = esc(lang["hours_format"].format(hours=FACTS["hours"]))
+        else:
+            value = fact_value(key)
         if value is None:
             continue  # omitted, never "TBD"
         rows.append(
@@ -268,6 +272,8 @@ def check_parity() -> None:
             raise SystemExit(f"[{code}] nav labels do not cover every page")
         if set(lang["fact_labels"]) != set(reference["fact_labels"]):
             raise SystemExit(f"[{code}] fact labels differ from English")
+        if "{hours}" not in lang.get("hours_format", ""):
+            raise SystemExit(f"[{code}] hours_format missing or lacks the {{hours}} placeholder")
         for slug in PAGE_ORDER:
             ours = lang["pages"][slug]["blocks"]
             theirs = reference["pages"][slug]["blocks"]

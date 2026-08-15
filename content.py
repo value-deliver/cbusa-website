@@ -29,8 +29,10 @@ FACTS = {
     "incorporated": None,    # Date of incorporation, e.g. "14 June 2022"
     "phone": None,           # Public telephone number in +1 XXX XXX XXXX form
     # ---------------------------------------------------------------------------------------
-    "email": "info@carsbuyusa.com",  # MUST be a live, monitored mailbox before launch
-    "hours": None,           # e.g. "Monday to Friday, 9:00-18:00 Eastern Time" -- owner to confirm
+    "email": "ops@carsbuyusa.com",  # MUST be a live, monitored mailbox before launch
+    # Times only. Each language supplies the surrounding wording via "hours_format", so the hours
+    # themselves are still single-sourced but a Ukrainian reader doesn't get an English sentence.
+    "hours": "09:00–17:00",
 }
 
 DOMAIN = "carsbuyusa.com"
@@ -70,6 +72,7 @@ EN = {
         "phone": "Telephone",
         "hours": "Business hours",
     },
+    "hours_format": "Monday to Friday, {hours} Eastern Time (ET)",
     "footer_heading": "Company details",
     "footer_trademark": (
         "Copart and IAA are trademarks of their respective owners. "
@@ -282,6 +285,7 @@ UK = {
         "phone": "Телефон",
         "hours": "Робочі години",
     },
+    "hours_format": "З понеділка по п’ятницю, {hours} за східним часом США (ET)",
     "footer_heading": "Реквізити компанії",
     "footer_trademark": (
         "Copart та IAA є торговельними марками відповідних власників. "
@@ -510,6 +514,7 @@ RU = {
         "phone": "Телефон",
         "hours": "Рабочие часы",
     },
+    "hours_format": "С понедельника по пятницу, {hours} по восточному времени США (ET)",
     "footer_heading": "Реквизиты компании",
     "footer_trademark": (
         "Copart и IAA являются товарными знаками соответствующих владельцев. "

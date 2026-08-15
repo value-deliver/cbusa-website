@@ -5,8 +5,13 @@ from `docs/`.
 
 Built to satisfy bank compliance checks on incoming international wires: a compliance officer
 holding one of our invoices must be able to confirm, from this site, that the company is real, is
-the entity named on the invoice, and does the thing the payment is for. Design rationale and
-constraints are in `spec/2026-08-14-carsbuyusa-website-design.md`.
+the entity named on the invoice, and does the thing the payment is for.
+
+Design rationale and constraints live **outside this repository**, in
+`../google-workspace-setup/WEBSITE-DESIGN-SPEC.md`. That is deliberate: GitHub Pages requires a
+public repository on the free plan, and internal notes on compliance positioning have no business
+being publicly readable next to the site they explain. Keep it that way — nothing internal goes in
+here.
 
 ## Build
 
@@ -51,10 +56,17 @@ that bounces during a verification check fails that check by itself.
 
 ## Deploy
 
-Once, to create the repository:
+Once, to create the repository. It must be **public** — GitHub Pages only serves from private
+repositories on paid plans:
 
 ```
-git remote add origin git@github.com:value-deliver/carsbuyusa-website.git
+gh repo create value-deliver/cbusa-website --public --source=. --remote=origin --push
+```
+
+Or, if the repository already exists:
+
+```
+git remote add origin git@github.com:value-deliver/cbusa-website.git
 git push -u origin main
 ```
 
@@ -100,10 +112,12 @@ nslookup -type=mx carsbuyusa.com
 build.py            generator
 content.py          FACTS + all copy, three languages
 assets/site.css     stylesheet
-spec/               design rationale — outside docs/, so never published
 docs/               GENERATED — the deployed site
-preview.html        GENERATED — single-file review copy, not deployed
+preview.html        GENERATED — single-file review copy, not deployed, gitignored
 ```
+
+Everything in this repository is public. The design spec and any other internal notes live in
+`../google-workspace-setup/`.
 
 ## Rules for this site
 
