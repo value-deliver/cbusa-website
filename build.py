@@ -23,6 +23,7 @@ import shutil
 from pathlib import Path
 
 from content import DOMAIN, FACTS, LANG_ORDER, LANGS, PAGE_ORDER, SITE_URL
+from journey import LABEL_KEYS, render_journey
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "docs"
@@ -91,7 +92,7 @@ def fact_rows(lang: dict, keys: list[str]) -> str:
 # Blocks
 # ---------------------------------------------------------------------------------------------
 
-def render_block(block: dict, lang: dict) -> str:
+def render_block(block: dict, lang: dict, page: dict) -> str:
     kind = block["type"]
     heading = f'    <h2>{esc(block["h2"])}</h2>\n' if block.get("h2") else ""
 
@@ -117,6 +118,11 @@ def render_block(block: dict, lang: dict) -> str:
             f'  <section class="block">\n{heading}'
             f'    <ol class="{css}">\n' + "\n".join(items) + "\n    </ol>\n  </section>"
         )
+
+    if kind == "journey":
+        # One scene per step; each scene is captioned with that step's title.
+        steps = next(b for b in page["blocks"] if b["type"] == "steps")
+        return render_journey(block["labels"], [title for title, _ in steps["items"]])
 
     if kind == "cards":
         items = "\n".join(
@@ -209,7 +215,7 @@ def render_footer(lang_code: str) -> str:
 def render_page(lang_code: str, slug: str) -> str:
     lang = LANGS[lang_code]
     page = lang["pages"][slug]
-    blocks = "\n\n".join(render_block(b, lang) for b in page["blocks"])
+    blocks = "\n\n".join(render_block(b, lang, page) for b in page["blocks"])
     title = f'{page["h1"]} — {FACTS["legal_name"]}' if slug != "index" else \
             f'{FACTS["legal_name"]} — {lang["tagline"]}'
     css_href = "/assets/site.css"
@@ -280,6 +286,8 @@ def check_parity() -> None:
             if [b["type"] for b in ours] != [b["type"] for b in theirs]:
                 raise SystemExit(f"[{code}] {slug}: block types differ from English")
             for a, b in zip(ours, theirs):
+                if a["type"] == "journey" and set(a["labels"]) != set(LABEL_KEYS):
+                    raise SystemExit(f"[{code}] {slug}: journey labels differ from {LABEL_KEYS}")
                 if a["type"] in ("steps", "cards", "list") and len(a["items"]) != len(b["items"]):
                     raise SystemExit(
                         f"[{code}] {slug}: '{a['type']}' has {len(a['items'])} items, "
@@ -343,7 +351,7 @@ def write_preview() -> None:
         )
         for slug in PAGE_ORDER:
             page = lang["pages"][slug]
-            blocks = "\n".join(render_block(b, lang) for b in page["blocks"])
+            blocks = "\n".join(render_block(b, lang, page) for b in page["blocks"])
             parts.append(
                 f'<article class="proof-page" lang="{code}">\n'
                 f'  <div class="proof-crumb">{esc(lang["nav"][slug])}</div>\n'

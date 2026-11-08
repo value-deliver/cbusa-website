@@ -130,23 +130,27 @@ EN = {
         "how-it-works": {
             "h1": "How it works",
             "desc": (
-                "The six steps of a vehicle purchase and export, from quotation to delivery at the "
+                "The five steps of a vehicle purchase and export, from quotation to delivery at the "
                 "destination port, and what appears on every invoice."
             ),
             "lead": (
-                "Every purchase follows the same six steps, and the client is invoiced once, for a "
+                "Every purchase follows the same five steps, and the client is invoiced once, for a "
                 "specific identified vehicle."
             ),
             "blocks": [
+                {"type": "journey", "labels": {
+                    "budget": "BUDGET", "budget_value": "$18,000",
+                    "vehicle": "VEHICLE", "vehicle_value": "2021 SUV, under 60k miles",
+                    "destination": "DESTINATION", "destination_value": "Port of destination",
+                    "auction": "AUCTION", "sold": "SOLD",
+                    "title": "CERTIFICATE OF TITLE", "export": "EXPORT DOCUMENTS",
+                    "cleared": "CLEARED",
+                }},
                 {"type": "steps", "h2": "The process", "numbered": True, "items": [
                     ("Request and quotation",
                      "The client tells us the vehicle, or the lot, they want. We confirm "
                      "availability and quote the total cost: the purchase price, auction fees, our "
                      "fee, inland transport, and ocean freight."),
-                    ("Agreement and payment",
-                     "The client receives a purchase agreement and an invoice identifying the "
-                     "vehicle. Funds are transferred to the company account named on that invoice, "
-                     "and nowhere else."),
                     ("Purchase at auction",
                      "We buy the vehicle and settle with the auction house within its payment "
                      "deadline. Auctions charge storage and can cancel a sale if payment is late, "
@@ -175,6 +179,9 @@ EN = {
                      "The buyer's name, address, and country",
                  ]},
                 {"type": "prose", "h2": "Payment", "paras": [
+                    "The client receives a purchase agreement and an invoice identifying the "
+                    "vehicle, and transfers funds to the company account named on that invoice, "
+                    "and nowhere else.",
                     "Wire instructions are issued only on the invoice we send to the client "
                     "directly. We never publish bank details on this website, and we do not change "
                     "payment instructions by email once an invoice has been issued.",
@@ -346,23 +353,27 @@ UK = {
         "how-it-works": {
             "h1": "Як це працює",
             "desc": (
-                "Шість етапів купівлі та експорту автомобіля — від розрахунку вартості до "
+                "П’ять етапів купівлі та експорту автомобіля — від розрахунку вартості до "
                 "доставки в порт призначення — та що зазначено в кожному рахунку."
             ),
             "lead": (
-                "Кожна купівля проходить ті самі шість етапів, і клієнт отримує один "
+                "Кожна купівля проходить ті самі п’ять етапів, і клієнт отримує один "
                 "рахунок за конкретний ідентифікований автомобіль."
             ),
             "blocks": [
+                {"type": "journey", "labels": {
+                    "budget": "БЮДЖЕТ", "budget_value": "$18 000",
+                    "vehicle": "АВТОМОБІЛЬ", "vehicle_value": "Кросовер 2021, до 100 тис. км",
+                    "destination": "ПРИЗНАЧЕННЯ", "destination_value": "Порт призначення",
+                    "auction": "АУКЦІОН", "sold": "ПРОДАНО",
+                    "title": "ТИТУЛ", "export": "ЕКСПОРТНІ ДОКУМЕНТИ",
+                    "cleared": "ОФОРМЛЕНО",
+                }},
                 {"type": "steps", "h2": "Процес", "numbered": True, "items": [
                     ("Запит і розрахунок вартості",
                      "Клієнт повідомляє, який автомобіль або лот його цікавить. Ми "
                      "підтверджуємо наявність і називаємо повну вартість: ціну купівлі, "
                      "аукціонні збори, нашу винагороду, наземне перевезення та морський фрахт."),
-                    ("Договір і оплата",
-                     "Клієнт отримує договір купівлі та рахунок із зазначенням автомобіля. "
-                     "Кошти перераховуються на рахунок компанії, вказаний у цьому рахунку, "
-                     "і на жодний інший."),
                     ("Купівля на аукціоні",
                      "Ми купуємо автомобіль і розраховуємося з аукціоном у встановлений "
                      "ним строк. Аукціони нараховують плату за зберігання і можуть скасувати "
@@ -395,6 +406,9 @@ UK = {
                      "Ім’я, адресу та країну покупця",
                  ]},
                 {"type": "prose", "h2": "Оплата", "paras": [
+                    "Клієнт отримує договір купівлі та рахунок із зазначенням автомобіля "
+                    "і перераховує кошти на рахунок компанії, вказаний у цьому рахунку, "
+                    "і на жодний інший.",
                     "Платіжні реквізити надаються виключно в рахунку, який ми надсилаємо "
                     "клієнтові безпосередньо. Ми ніколи не публікуємо банківські "
                     "реквізити на цьому сайті й не змінюємо платіжні інструкції "
@@ -580,25 +594,29 @@ RU = {
         "how-it-works": {
             "h1": "Как это работает",
             "desc": (
-                "Шесть этапов покупки и экспорта автомобиля — от расчёта "
+                "Пять этапов покупки и экспорта автомобиля — от расчёта "
                 "стоимости до доставки в порт назначения — и что указано в "
                 "каждом счёте."
             ),
             "lead": (
-                "Каждая покупка проходит одни и те же шесть этапов, и клиент "
+                "Каждая покупка проходит одни и те же пять этапов, и клиент "
                 "получает один счёт за конкретный идентифицированный автомобиль."
             ),
             "blocks": [
+                {"type": "journey", "labels": {
+                    "budget": "БЮДЖЕТ", "budget_value": "$18 000",
+                    "vehicle": "АВТОМОБИЛЬ", "vehicle_value": "Кроссовер 2021, до 100 тыс. км",
+                    "destination": "НАЗНАЧЕНИЕ", "destination_value": "Порт назначения",
+                    "auction": "АУКЦИОН", "sold": "ПРОДАНО",
+                    "title": "ТИТУЛ", "export": "ЭКСПОРТНЫЕ ДОКУМЕНТЫ",
+                    "cleared": "ОФОРМЛЕНО",
+                }},
                 {"type": "steps", "h2": "Процесс", "numbered": True, "items": [
                     ("Запрос и расчёт стоимости",
                      "Клиент сообщает, какой автомобиль или лот его интересует. "
                      "Мы подтверждаем наличие и называем полную стоимость: цену "
                      "покупки, аукционные сборы, наше вознаграждение, наземную "
                      "перевозку и морской фрахт."),
-                    ("Договор и оплата",
-                     "Клиент получает договор купли-продажи и счёт с указанием "
-                     "автомобиля. Средства перечисляются на счёт компании, "
-                     "указанный в этом счёте, и ни на какой другой."),
                     ("Покупка на аукционе",
                      "Мы покупаем автомобиль и рассчитываемся с аукционом в "
                      "установленный им срок. Аукционы начисляют плату за хранение "
@@ -631,6 +649,9 @@ RU = {
                      "Имя, адрес и страна покупателя",
                  ]},
                 {"type": "prose", "h2": "Оплата", "paras": [
+                    "Клиент получает договор купли-продажи и счёт с указанием "
+                    "автомобиля и перечисляет средства на счёт компании, указанный "
+                    "в этом счёте, и ни на какой другой.",
                     "Платёжные реквизиты предоставляются исключительно в счёте, "
                     "который мы направляем клиенту напрямую. Мы никогда не "
                     "публикуем банковские реквизиты на этом сайте и не меняем "

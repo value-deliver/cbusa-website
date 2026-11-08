@@ -177,6 +177,180 @@ footer a:hover { color: #fff; }
 .footer-notes p { font-size: .78rem; line-height: 1.6; color: var(--footer-soft); }
 .copyright { margin-top: 1rem; }
 
+/* ----------------------------------------------------------------- journey */
+
+/* The "How it works" cartoon, markup in journey.py. The one dark element on the site, on purpose.
+   By default it is a static grid of five finished scenes: that is what browsers without
+   scroll-driven animations, and visitors who asked for reduced motion, see. The pinned, animated
+   version is layered on in the @media/@supports block below. No JavaScript either way. */
+
+.journey { padding: 2.25rem 0 .5rem; }
+.j-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.j-sky, .j-sun, .j-dots { display: none; }
+
+.j-track { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.25rem 1rem; }
+.j-panel { position: relative; container-type: inline-size; }
+.j-panel svg { display: block; width: 100%; height: auto; aspect-ratio: 640 / 300; border-radius: 10px; }
+.j-panel:nth-child(1) svg, .j-sky1 { background: linear-gradient(#8fa9c8, #dcd3c9 70%, #efe2cf); }
+.j-panel:nth-child(2) svg, .j-sky2 { background: linear-gradient(#5f88b6, #b9d0e4 70%, #dde8f0); }
+.j-panel:nth-child(3) svg, .j-sky3 { background: linear-gradient(#5b77a0, #c9b9a6 66%, #ead2ae); }
+.j-panel:nth-child(4) svg, .j-sky4 { background: linear-gradient(#45597c, #d9967a 62%, #f2cf9e); }
+.j-panel:nth-child(5) svg, .j-sky5 { background: linear-gradient(#2c3b57, #b9766a 60%, #efbf8a); }
+.j-panel svg text { font-family: var(--sans); }
+.j-panel svg * { transform-box: fill-box; }
+
+/* Static version: the step title sits under its picture. */
+.j-cap {
+  display: flex; align-items: center; gap: .5rem; margin-top: .6rem;
+  font-size: .9rem; font-weight: 650; line-height: 1.3; color: var(--ink);
+}
+.j-cap b {
+  flex: none; display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem;
+  border-radius: 50%; background: #e7b46a; color: #141e2b; font-size: .74rem;
+}
+
+/* Finished states, for the static version. The animations below start from elsewhere. */
+.j-plane, .j-ondeck { opacity: 0; }
+.j-padl { transform: translateY(40px); }
+.j-stamp { transform-origin: center; transform: rotate(-12deg); }
+.j-sold { transform-origin: center; }
+.j-tick { stroke-dasharray: 60; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* The section is tall; the stage pins while it scrolls past and the strip slides sideways. */
+    .journey { height: 600vh; padding: 0; margin: 1rem 0; view-timeline-name: --journey; }
+    .j-sticky {
+      position: sticky; top: 0; height: 100vh; height: 100svh;
+      display: flex; align-items: center;
+    }
+    .j-stage {
+      position: relative; width: 100%; aspect-ratio: 640 / 300; max-height: 100vh; max-height: 100svh;
+      overflow: hidden; container-type: inline-size; border-radius: 10px;
+      box-shadow: 0 20px 50px rgba(20, 30, 43, .25);
+    }
+    .j-sky { display: block; position: absolute; inset: 0; }
+    .j-sun {
+      display: block; position: absolute; left: 56cqw; top: 3cqw; width: 14cqw; height: 14cqw;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fffaf0 0 18%, #ffe2b0 30%, rgba(255, 217, 160, .35) 50%,
+                  rgba(255, 217, 160, 0) 70%);
+    }
+    .j-track { display: flex; gap: 0; width: 500cqw; height: 100%; position: relative; }
+    .j-track > .j-panel { flex: 0 0 100cqw; height: 100%; }
+    .j-track > .j-panel svg { height: 100%; aspect-ratio: auto; border-radius: 0; background: none; }
+    .j-dots {
+      display: flex; position: absolute; top: 2.6cqw; right: 2.6cqw; gap: 1cqw;
+      padding: .8cqw 1.2cqw; border-radius: 99px;
+      background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .3);
+    }
+    .j-dots i { width: 1cqw; height: 1cqw; border-radius: 50%; background: rgba(255, 255, 255, .35); }
+    /* Animated version: the step title is laid over the top-left of the moving picture. */
+    .j-cap {
+      position: absolute; left: 2.6cqw; top: 2.4cqw; right: 18cqw; margin: 0;
+      gap: max(.45rem, 1.2cqw); color: #fff; font-size: max(.8rem, 2.2cqw); line-height: 1.2;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .35);
+    }
+    .j-cap b {
+      width: max(1.4rem, 3.6cqw); height: max(1.4rem, 3.6cqw); font-size: max(.72rem, 1.9cqw);
+      text-shadow: none;
+    }
+
+    /* Every animation runs on the same timeline: how far the section has scrolled. The keyframe
+       percentages are positions along it, so the scenes are choreographed against each other. */
+    .j-a {
+      animation-duration: 1ms; animation-timing-function: linear; animation-fill-mode: both;
+      animation-timeline: --journey; animation-range: contain 0% contain 100%;
+    }
+
+    @keyframes j-pan {
+      0%, 12% { transform: translateX(0); }
+      20%, 32% { transform: translateX(-100cqw); }
+      40%, 52% { transform: translateX(-200cqw); }
+      60%, 70% { transform: translateX(-300cqw); }
+      78%, 100% { transform: translateX(-400cqw); }
+    }
+    .j-track.j-a { animation-name: j-pan; }
+
+    @keyframes j-s2 { 0%, 13% { opacity: 0; } 20%, 100% { opacity: 1; } }
+    @keyframes j-s3 { 0%, 33% { opacity: 0; } 40%, 100% { opacity: 1; } }
+    @keyframes j-s4 { 0%, 53% { opacity: 0; } 60%, 100% { opacity: 1; } }
+    @keyframes j-s5 { 0%, 71% { opacity: 0; } 78%, 100% { opacity: 1; } }
+    .j-sky2 { animation-name: j-s2; }
+    .j-sky3 { animation-name: j-s3; }
+    .j-sky4 { animation-name: j-s4; }
+    .j-sky5 { animation-name: j-s5; }
+    @keyframes j-sun { 0% { transform: translate(0, 0) scale(.8); } 100% { transform: translate(-8cqw, 28cqw) scale(1.25); } }
+    .j-sun { animation-name: j-sun; }
+
+    /* 1 request */
+    @keyframes j-ty1 { 0% { clip-path: inset(0 100% 0 0); } 3%, 100% { clip-path: inset(0); } }
+    @keyframes j-ty2 { 0%, 3% { clip-path: inset(0 100% 0 0); } 6%, 100% { clip-path: inset(0); } }
+    @keyframes j-ty3 { 0%, 6% { clip-path: inset(0 100% 0 0); } 9%, 100% { clip-path: inset(0); } }
+    @keyframes j-plane {
+      0%, 9% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 1; }
+      15% { opacity: 1; transform: translate(200px, -110px); }
+      16%, 100% { opacity: 0; transform: translate(200px, -110px); }
+    }
+    .j-ty1 { animation-name: j-ty1; }
+    .j-ty2 { animation-name: j-ty2; }
+    .j-ty3 { animation-name: j-ty3; }
+    .j-plane { animation-name: j-plane; }
+
+    /* 2 auction */
+    @keyframes j-padl { 0%, 20% { transform: translateY(40px); } 23%, 25% { transform: translateY(0); } 26%, 100% { transform: translateY(40px); } }
+    @keyframes j-padr { 0%, 25% { transform: translateY(40px); } 28%, 100% { transform: translateY(0); } }
+    @keyframes j-sold { 0%, 29% { opacity: 0; transform: scale(.4); } 32%, 100% { opacity: 1; transform: scale(1); } }
+    @keyframes j-beam { 0%, 18% { opacity: .2; } 30%, 100% { opacity: 1; } }
+    .j-padl { animation-name: j-padl; }
+    .j-padr { animation-name: j-padr; }
+    .j-sold { animation-name: j-sold; }
+    .j-beam { animation-name: j-beam; }
+
+    /* 3 documents */
+    @keyframes j-doc2 { 0%, 38% { opacity: 0; transform: translateX(120px); } 44%, 100% { opacity: 1; transform: translateX(0); } }
+    @keyframes j-stamp {
+      0%, 46% { opacity: 0; transform: rotate(-12deg) scale(1.8); }
+      49%, 100% { opacity: 1; transform: rotate(-12deg) scale(1); }
+    }
+    @keyframes j-tick { 0%, 49% { stroke-dashoffset: 60; } 52%, 100% { stroke-dashoffset: 0; } }
+    .j-doc2 { animation-name: j-doc2; }
+    .j-stamp { animation-name: j-stamp; }
+    .j-tick { animation-name: j-tick; }
+
+    /* 4 truck */
+    @keyframes j-truck { 0%, 52% { transform: translateX(-340px); } 70%, 100% { transform: translateX(150px); } }
+    @keyframes j-road { 0%, 52% { stroke-dashoffset: 0; } 70%, 100% { stroke-dashoffset: -600; } }
+    .j-truck { animation-name: j-truck; }
+    .j-road { stroke-dasharray: 30 30; animation-name: j-road; }
+
+    /* 5 sea and arrival */
+    @keyframes j-ship { 0%, 76% { transform: translateX(-460px); } 88%, 100% { transform: translateX(0); } }
+    @keyframes j-ondeck { 0%, 89% { opacity: 1; } 90%, 100% { opacity: 0; } }
+    @keyframes j-rolloff {
+      0%, 89% { opacity: 0; transform: translateX(-125px); }
+      90% { opacity: 1; transform: translateX(-125px); }
+      95%, 100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes j-arms { 0%, 95% { opacity: 0; } 97%, 100% { opacity: 1; } }
+    @keyframes j-spark { 0%, 96% { opacity: 0; transform: scale(.3); } 99%, 100% { opacity: 1; transform: scale(1); } }
+    .j-ship { animation-name: j-ship; }
+    .j-ondeck { animation-name: j-ondeck; }
+    .j-rolloff { animation-name: j-rolloff; }
+    .j-arms { animation-name: j-arms; }
+    .j-spark { transform-origin: center; animation-name: j-spark; }
+
+    @keyframes j-dot { 0% { background: rgba(255, 255, 255, .35); } 100% { background: #e7b46a; } }
+    .j-dots i.j-a { animation-name: j-dot; }
+    .j-dots .j-d1 { animation-range: contain 0% contain 1%; }
+    .j-dots .j-d2 { animation-range: contain 16% contain 20%; }
+    .j-dots .j-d3 { animation-range: contain 36% contain 40%; }
+    .j-dots .j-d4 { animation-range: contain 56% contain 60%; }
+    .j-dots .j-d5 { animation-range: contain 74% contain 78%; }
+  }
+}
+
 /* -------------------------------------------------------------- responsive */
 
 @media (max-width: 62rem) {
@@ -199,7 +373,7 @@ footer a:hover { color: #fff; }
 
 /* Compliance officers print and file these pages. */
 @media print {
-  header .nav, header .langs, .skip { display: none; }
+  header .nav, header .langs, .skip, .journey { display: none; }
   body { font-size: 11pt; }
   footer { background: none; color: #000; border-top: 1px solid #000; }
   footer h2, footer a, .facts-compact dt, .facts-compact dd, .footer-notes p { color: #000; }
