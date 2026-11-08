@@ -219,10 +219,15 @@ footer a:hover { color: #fff; }
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     /* The section is tall; the stage pins while it scrolls past and the strip slides sideways. */
-    .journey { height: 600vh; padding: 0; margin: 1rem 0; view-timeline-name: --journey; }
+    .journey { height: 600vh; padding: 0; margin: .5rem 0 0; view-timeline-name: --journey; }
+    /* Only as tall as the stage, so it starts right under the page intro and ends right above
+       the next section. It pins once it has scrolled up to the vertical middle of the screen:
+       the stage is the .wrap content width (viewport capped at 62rem, less 2.5rem padding)
+       times 300/640. */
     .j-sticky {
-      position: sticky; top: 0; height: 100vh; height: 100svh;
-      display: flex; align-items: center;
+      position: sticky;
+      top: max(0px, calc(50vh - (min(100vw, 62rem) - 2.5rem) * .234375));
+      top: max(0px, calc(50svh - (min(100vw, 62rem) - 2.5rem) * .234375));
     }
     .j-stage {
       position: relative; width: 100%; aspect-ratio: 640 / 300; max-height: 100vh; max-height: 100svh;
