@@ -216,6 +216,9 @@ footer a:hover { color: #fff; }
 .j-sold { transform-origin: center; }
 .j-tick { stroke-dasharray: 60; }
 
+/* Under the home-page copy of the cartoon: a link to the full How it works page. */
+.j-more { margin: 1rem 0 0; padding-bottom: 1.5rem; font-weight: 650; }
+
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     /* The section is tall; the stage pins while it scrolls past and the strip slides sideways. */
@@ -344,6 +347,8 @@ footer a:hover { color: #fff; }
     .j-ondeck { animation-name: j-ondeck; }
     .j-rolloff { animation-name: j-rolloff; }
     .j-arms { animation-name: j-arms; }
+    @keyframes j-spot { 0%, 93% { opacity: 0; } 97%, 100% { opacity: 1; } }
+    .j-spot { animation-name: j-spot; }
     .j-spark { transform-origin: center; animation-name: j-spark; }
 
     @keyframes j-dot { 0% { background: rgba(255, 255, 255, .35); } 100% { background: #e7b46a; } }
@@ -378,7 +383,7 @@ footer a:hover { color: #fff; }
 
 /* Compliance officers print and file these pages. */
 @media print {
-  header .nav, header .langs, .skip, .journey { display: none; }
+  header .nav, header .langs, .skip, .journey, .j-more { display: none; }
   body { font-size: 11pt; }
   footer { background: none; color: #000; border-top: 1px solid #000; }
   footer h2, footer a, .facts-compact dt, .facts-compact dd, .footer-notes p { color: #000; }

@@ -57,6 +57,7 @@
     <linearGradient id="j-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6a82"/><stop offset="1" stop-color="#1e2b3d"/></linearGradient>
     <linearGradient id="j-beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3d6" stop-opacity=".55"/><stop offset="1" stop-color="#fff3d6" stop-opacity=".05"/></linearGradient>
     <linearGradient id="j-head" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffe2b0" stop-opacity=".55"/><stop offset="1" stop-color="#ffe2b0" stop-opacity="0"/></linearGradient>
+    <linearGradient id="j-spot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3d6" stop-opacity=".05"/><stop offset="1" stop-color="#fff3d6" stop-opacity=".5"/></linearGradient>
     <radialGradient id="j-glow"><stop offset="0" stop-color="#ffe9c4" stop-opacity=".9"/><stop offset="1" stop-color="#ffe9c4" stop-opacity="0"/></radialGradient>
   </defs>
 </svg>
@@ -150,20 +151,24 @@
         </div>
         <div class="j-panel">
           <svg viewBox="0 0 640 300">
-            <rect x="0" y="232" width="470" height="68" fill="url(#j-sea)"/>
-            <g fill="#ffe2b0"><rect x="300" y="238" width="120" height="2" opacity=".55"/><rect x="320" y="246" width="80" height="2" opacity=".4"/><rect x="335" y="254" width="50" height="2" opacity=".3"/></g>
-            <rect x="460" y="212" width="180" height="88" fill="#141e2b"/>
+            <rect x="0" y="232" width="272" height="68" fill="url(#j-sea)"/>
+            <g fill="#ffe2b0"><rect x="70" y="272" width="120" height="2" opacity=".5"/><rect x="90" y="280" width="80" height="2" opacity=".38"/><rect x="105" y="288" width="50" height="2" opacity=".28"/></g>
+            <rect x="262" y="212" width="378" height="88" fill="#141e2b"/>
             <g class="j-a j-ship">
-              <path d="M150 212 L452 212 L432 262 L170 262Z" fill="#141e2b"/>
-              <rect x="164" y="160" width="36" height="52" fill="#141e2b"/>
-              <g fill="#ffd9a0" opacity=".7"><rect x="170" y="168" width="6" height="5"/><rect x="182" y="168" width="6" height="5"/><rect x="170" y="180" width="6" height="5"/></g>
-              <g fill="#1e2b3d"><rect x="210" y="180" width="38" height="32"/><rect x="252" y="180" width="38" height="32"/><rect x="231" y="146" width="38" height="32"/></g>
-              <use class="j-a j-ondeck" href="#j-car" x="335" y="181" width="105" height="32" fill="#2a3a52" style="--win:#4a5e7e;--rim:#5a6a82"/>
+              <path d="M8 212 L264 212 L244 262 L28 262Z" fill="#141e2b"/>
+              <rect x="22" y="160" width="36" height="52" fill="#141e2b"/>
+              <g fill="#ffd9a0" opacity=".7"><rect x="28" y="168" width="6" height="5"/><rect x="40" y="168" width="6" height="5"/><rect x="28" y="180" width="6" height="5"/></g>
+              <g fill="#1e2b3d"><rect x="66" y="180" width="36" height="32"/><rect x="104" y="180" width="36" height="32"/><rect x="85" y="146" width="36" height="32"/></g>
+              <use class="j-a j-ondeck" href="#j-car" x="143" y="181" width="105" height="32" fill="#2a3a52" style="--win:#4a5e7e;--rim:#5a6a82"/>
             </g>
-            <use class="j-a j-rolloff" href="#j-car" x="460" y="181" width="105" height="32" fill="#2a3a52" style="--win:#4a5e7e;--rim:#5a6a82"/>
-            <use href="#j-person" x="585" y="108" width="34" height="106" fill="#141e2b"/>
-            <path class="j-a j-arms" d="M591 134 L582 108 M613 134 L622 108" stroke="#141e2b" stroke-width="4.5" stroke-linecap="round"/>
-            <g class="j-a j-spark" fill="#e7b46a"><circle cx="572" cy="100" r="3.5"/><circle cx="634" cy="96" r="3.5"/><circle cx="566" cy="126" r="2.5"/><circle cx="604" cy="84" r="2.5"/></g>
+            <g class="j-a j-spot">
+              <path d="M306 0 L334 0 L392 213 L248 213Z" fill="url(#j-spot)"/>
+              <ellipse cx="320" cy="213" rx="80" ry="8" fill="url(#j-glow)"/>
+            </g>
+            <use class="j-a j-rolloff" href="#j-car" x="268" y="181" width="105" height="32" fill="#2a3a52" style="--win:#4a5e7e;--rim:#5a6a82"/>
+            <use href="#j-person" x="404" y="108" width="34" height="106" fill="#141e2b"/>
+            <path class="j-a j-arms" d="M410 134 L401 108 M432 134 L441 108" stroke="#141e2b" stroke-width="4.5" stroke-linecap="round"/>
+            <g class="j-a j-spark" fill="#e7b46a"><circle cx="391" cy="100" r="3.5"/><circle cx="453" cy="96" r="3.5"/><circle cx="385" cy="126" r="2.5"/><circle cx="423" cy="84" r="2.5"/></g>
           </svg>
           <div class="j-cap"><b>5</b> Морской фрахт и доставка</div>
         </div>

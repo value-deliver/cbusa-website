@@ -120,9 +120,19 @@ def render_block(block: dict, lang: dict, page: dict) -> str:
         )
 
     if kind == "journey":
-        # One scene per step; each scene is captioned with that step's title.
-        steps = next(b for b in page["blocks"] if b["type"] == "steps")
-        return render_journey(block["labels"], [title for title, _ in steps["items"]])
+        # One scene per step; each scene is captioned with that step's title. A journey with
+        # "from" shows another page's cartoon (labels and step titles) and links to that page.
+        source = lang["pages"][block["from"]] if "from" in block else page
+        labels = next(b for b in source["blocks"] if b["type"] == "journey")["labels"]
+        steps = next(b for b in source["blocks"] if b["type"] == "steps")
+        out = render_journey(labels, [title for title, _ in steps["items"]])
+        if "from" in block:
+            code = next(c for c in LANG_ORDER if LANGS[c] is lang)
+            out += (
+                f'\n  <p class="j-more"><a href="{url(code, block["from"])}">{esc(block["link"])} '
+                f'<span aria-hidden="true">→</span></a></p>'
+            )
+        return out
 
     if kind == "cards":
         items = "\n".join(
@@ -286,7 +296,10 @@ def check_parity() -> None:
             if [b["type"] for b in ours] != [b["type"] for b in theirs]:
                 raise SystemExit(f"[{code}] {slug}: block types differ from English")
             for a, b in zip(ours, theirs):
-                if a["type"] == "journey" and set(a["labels"]) != set(LABEL_KEYS):
+                if a["type"] == "journey" and "from" in b:
+                    if a.get("from") != b["from"] or not a.get("link"):
+                        raise SystemExit(f"[{code}] {slug}: journey needs from={b['from']!r} and link text")
+                elif a["type"] == "journey" and set(a["labels"]) != set(LABEL_KEYS):
                     raise SystemExit(f"[{code}] {slug}: journey labels differ from {LABEL_KEYS}")
                 if a["type"] in ("steps", "cards", "list") and len(a["items"]) != len(b["items"]):
                     raise SystemExit(

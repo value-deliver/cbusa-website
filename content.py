@@ -94,6 +94,7 @@ EN = {
                 "destination port."
             ),
             "blocks": [
+                {"type": "journey", "from": "how-it-works", "link": "See how it works"},
                 {"type": "steps", "h2": "How a purchase works", "items": [
                     ("Purchase at auction",
                      "We locate the lot, buy it on the client's instruction, and settle payment "
@@ -314,6 +315,7 @@ UK = {
                 "документи і доставляє їх до порту призначення."
             ),
             "blocks": [
+                {"type": "journey", "from": "how-it-works", "link": "Подивіться, як це працює"},
                 {"type": "steps", "h2": "Як відбувається купівля", "items": [
                     ("Купівля на аукціоні",
                      "Ми знаходимо лот, купуємо його за дорученням клієнта та розраховуємося "
@@ -552,6 +554,7 @@ RU = {
                 "назначения."
             ),
             "blocks": [
+                {"type": "journey", "from": "how-it-works", "link": "Посмотрите, как это работает"},
                 {"type": "steps", "h2": "Как происходит покупка", "items": [
                     ("Покупка на аукционе",
                      "Мы находим лот, покупаем его по поручению клиента и "
